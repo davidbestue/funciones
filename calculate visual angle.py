@@ -1,14 +1,8 @@
 
 # coding: utf-8
 
-# In[4]:
-
-
 from math import atan, degrees
 import easygui
-
-
-# In[5]:
 
 
 #box to enter stim size and distance
@@ -23,9 +17,6 @@ stim_size=int(stim_size)
 distance = easygui.enterbox(msg='Enter the distance (cm)', title='value')
 distance=int(distance)
 
-
-
-# In[6]:
 
 
 visual_angle = degrees(  atan( (float(stim_size)/2)  / float(distance)  )    )  *  2
