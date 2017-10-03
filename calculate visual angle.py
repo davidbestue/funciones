@@ -9,6 +9,8 @@ import easygui
 
 #second new line
 
+#Rita new line
+
 #box to enter stim size and distance
 
 #stim size
