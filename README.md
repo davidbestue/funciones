@@ -21,6 +21,7 @@ dotplot(df=df, columns='A_err', subjects='subject', colors='k', xnames='Cond1')
 
 
 Example with 2
+
 dotplot(df=df, columns=['A_err', 'A_err_abs' ], subjects='subject', colors=['r', 'g'], xnames=['cond1', 'Cond2'],
         title='Conditions plot', xlabel='', ylabel='value')
 
