@@ -12,7 +12,9 @@ Dot plot function
 
 Example with 1
 
+```
 dotplot(df=df, columns='A_err', subjects='subject', colors='k', xnames='Cond1')
+```
 
 ![](https://github.com/davidbestue/funciones/blob/master/download%20(1).png)
 
