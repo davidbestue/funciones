@@ -1,13 +1,4 @@
-- Function to calculate the int. error
-
-- Function to calvulate visual angles
-
-- Dot function for plots
-
-
-
-Dot plot function
-
+# Dot plot function
 
 Example with 1
 
