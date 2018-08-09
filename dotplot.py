@@ -28,7 +28,6 @@ def dotplot(df, columns, subjects, dotsize=10, dotsizemin=5, colors='g', xnames=
         return sup, inf
     
     def bootstrap_subjlevel_diff_n(DATA, col_int, indx_subj):
-      from scikits.bootstrap import ci 
       data_grouped=df.groupby(indx_subj)
       ci([data_grouped.get_group(i)[col_int].mean() for i in df[indx_subj].unique()])
       sup, inf =     ci([data_grouped.get_group(i)[col_int].mean() for i in df[indx_subj].unique()])
