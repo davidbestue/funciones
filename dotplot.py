@@ -4,7 +4,7 @@
 #You input a pandas Dataframe
 
 def dotplot(df, columns, subjects, dotsize=10, dotsizemin=5, colors='g', xnames='',
-             title='', xlabel='', ylabel=''):
+             title='', xlabel='', ylabel='', bootstrap_function_use = 'bootstrap_subjlevel_same_n'):
     #######################################################################################
     #######################################################################################
     import numpy as np
@@ -22,11 +22,23 @@ def dotplot(df, columns, subjects, dotsize=10, dotsizemin=5, colors='g', xnames=
         colors=[colors]
     
     #Function
-    def bootstrap_subjlevel(df, col_int, indx_subj):
+    def bootstrap_subjlevel_same_n(df, col_int, indx_subj):
         data_grouped=df.groupby(indx_subj)
         sup, inf =     ci([data_grouped.get_group(i)[col_int].mean() for i in df[indx_subj].unique()])
         return sup, inf
     
+    def bootstrap_subjlevel_diff_n(DATA, col_int, indx_subj):
+      from scikits.bootstrap import ci 
+      data_grouped=df.groupby(indx_subj)
+      ci([data_grouped.get_group(i)[col_int].mean() for i in df[indx_subj].unique()])
+      sup, inf =     ci([data_grouped.get_group(i)[col_int].mean() for i in df[indx_subj].unique()])
+      return sup, inf
+    
+    if bootstrap_function_use == 'bootstrap_subjlevel_same_n'
+      bootstrap_function = bootstrap_subjlevel_same_n
+     elif bootstrap_function_use == 'bootstrap_subjlevel_diff_n':
+      bootstrap_function = bootstrap_subjlevel_diff_n
+      
     ########################################################################################
     ########################################################################################
     #Plot for each column
@@ -38,7 +50,7 @@ def dotplot(df, columns, subjects, dotsize=10, dotsizemin=5, colors='g', xnames=
             color = colors[0]
         
         #Confidence interval subject
-        sup, inf = bootstrap_subjlevel(df, column, subjects)
+        sup, inf = bootstrap_function(df, column, subjects)
         errors=(   [abs(sup -df[column].mean())], [abs(df[column].mean() - inf)])
 
         #Plot
