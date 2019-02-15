@@ -40,8 +40,9 @@ Simple example
 from bootstrap import *
 
 a = np.random.rand(1000)
-bootstrap_repl(a, ci=95, n=1000, stat=np.mean)
+n = bootstrap_repl(a, ci=95, n=1000, stat=np.mean)
 
+print(n)
 (0.4736973603664837, 0.5102396146145342)
 ```
 
@@ -62,7 +63,7 @@ print(n)
 #### Paralel
 numcores = multiprocessing.cpu_count()
 n = Parallel(n_jobs = numcores)(delayed(bootstrap_repl)(a) for a in As)
-print(n)
 
+print(n)
 [(0.4736973603664837, 0.5102396146145342), (0.49254558510255847, 0.5286548899342883), ... , (0.4704919715461403, 0.5052919240356857)]
 ```
