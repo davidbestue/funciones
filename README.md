@@ -31,8 +31,7 @@ Commented you have an example of how to run it in parallel for multiple samples.
 It is bootstrap with replacement. It takes an array of the same length of the original but there is going to be repeted measures.
 
 It is suggested to put it into the site-pakeges folder
-
-'C:\Users\David\Anaconda3\envs\python3\Lib\site-packages'
+'C:\Users\David\Anaconda3\envs\python3\Lib\site-packages\bootstrap.py'
 
 
 Simple example
