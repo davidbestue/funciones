@@ -67,3 +67,16 @@ n = Parallel(n_jobs = numcores)(delayed(bootstrap_repl)(a) for a in As)
 print(n)
 [(0.4736973603664837, 0.5102396146145342), (0.49254558510255847, 0.5286548899342883), ... , (0.4704919715461403, 0.5052919240356857)]
 ```
+
+# Decode function
+
+From an activity decodes the population vector
+
+```
+decode(RE)
+```
+
+Output is an angle 0-360 degrees. Negative values are computed as positive in the opposite quadrant (q1;q3, q2:q4)
+
+
+
