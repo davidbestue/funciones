@@ -16,7 +16,7 @@ def bootstrap_repl(a, ci=95, n=1000, stat=np.mean):
     # decide the confidence interval, default = 95%
     sample = []
     for i in range(n):
-        resample = a[np.random.randint(1, len(a), len(a))] 
+        resample = a[np.random.randint(0, len(a), len(a))] 
         sample.append(stat(resample))
     
     # c1
