@@ -79,4 +79,8 @@ decode(RE)
 Output is an angle 0-360 degrees. Negative values are computed as positive in the opposite quadrant (q1;q3, q2:q4)
 
 
+# remove_outlier_mult_columns.py
 
+Remove the otliers of many columns at the same time! From the initial dataframe)
+Input a list with the names of the columns (Pandas dataFrame)
+Output the dataframe without outliers.
