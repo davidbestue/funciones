@@ -6,7 +6,7 @@ Example with 1
 dotplot(df=df, columns='A_err', subjects='subject', colors='k', xnames='Cond1')
 ```
 
-![](https://github.com/davidbestue/funciones/blob/master/download%20(1).png)
+![](https://github.com/davidbestue/funciones/blob/master/imgs/download%20(1).png)
 
 
 
@@ -20,7 +20,7 @@ dotplot(df=df, columns=['A_err', 'A_err_abs' ], subjects='subject', colors=['r',
 ```
 
 
-![](https://raw.githubusercontent.com/davidbestue/funciones/master/download.png)
+![](https://raw.githubusercontent.com/davidbestue/funciones/master/imgs/download.png)
 
 
 # bootstrap.py
@@ -90,6 +90,6 @@ Output the dataframe without outliers and a boxplot for each of the columns anal
 df_b_r = remove_outlier_mult_columns( df_b_r, ['beer','rand'])
 ```
 
-![](https://github.com/davidbestue/funciones/blob/master/img_outliers.png)
+![](https://github.com/davidbestue/funciones/blob/master/imgs/img_outliers.png)
 
 
