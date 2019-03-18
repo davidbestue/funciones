@@ -17,8 +17,23 @@ def remove_outlier_mult_columns(df_in, col_names):
     
     outliers_bool = sum(outliers_booleans)
     outliers_bool[outliers_bool>=1] = 1
+    print( 'number of outliers: ' + str(sum(outliers_bool)) )
     outliers_bool = outliers_bool == 0
+    
+    ###boxplots of outliers
+    fig = plt.figure()
+    fig.suptitle('Detection of outliers')
+    pallete = sns.color_palette("viridis", n_colors=len(col_names), desat=1).as_hex()
+    for idx,col_name in enumerate(col_names):
+        ax1 = fig.add_subplot(1,len(col_names),idx+1)
+        sns.boxplot(df_b_r[col_name], orient="h", ax=ax1, color=pallete[idx])
+    
+    ##
+    plt.show()
+    
+    
     return df_in[outliers_bool]
+    
     
 
 
