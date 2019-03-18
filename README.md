@@ -90,6 +90,18 @@ Output the dataframe without outliers and a boxplot for each of the columns anal
 df_b_r = remove_outlier_mult_columns( df_b_r, ['beer','rand'])
 ```
 
-![](https://github.com/davidbestue/funciones/blob/master/imgs/img_outliers.png)
+![](https://github.com/davidbestue/funciones/blob/master/imgs/img_outliers.png)  
+
+
+# statistical_annotation.ipynb  
+
+Example of how to add statistical annotations on a boxplot
+
+![](https://github.com/davidbestue/funciones/blob/master/imgs/stat_anot.png)    
+
+
+
+
+
 
 
