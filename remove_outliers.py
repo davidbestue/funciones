@@ -5,6 +5,10 @@ Created on Wed Apr 10 10:09:09 2019
 @author: David Bestue
 """
 
+import pandas as pd
+import seaborn as sns 
+import matplotlib.pyplot as plt
+
 def remove_outlier_mult_columns(df_in, col_names):
     ### column names is a list of the columns to remove outliers
     outliers_booleans = []
@@ -30,10 +34,10 @@ def remove_outlier_mult_columns(df_in, col_names):
     pallete = sns.color_palette("viridis", n_colors=len(col_names), desat=1).as_hex()
     for idx,col_name in enumerate(col_names):
         ax1 = fig.add_subplot(1,len(col_names),idx+1)
-        sns.boxplot(df_b_r[col_name], orient="h", ax=ax1, color=pallete[idx])
+        sns.boxplot(df_in[col_name], orient="h", ax=ax1, color=pallete[idx])
     
     ##
-    plt.show()
+    plt.show(block=False)
     
     
     return df_in[outliers_bool]
@@ -41,5 +45,9 @@ def remove_outlier_mult_columns(df_in, col_names):
     
 
 
+
+
 ### Example
 ##df_b_r = remove_outlier_mult_columns( df_b_r, ['beer','rand'])
+    
+df = pd.read_excel('Datos WB Lau.xlsx') 
