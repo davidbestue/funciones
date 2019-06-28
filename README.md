@@ -5,6 +5,8 @@ Linares plot consist of a sina plot plus a box that contains the mean and the 95
 Yo need to previously install sinaplot from https://github.com/mparker2/seaborn_sinaplot  
 ```
 linares_plot(x='order', y='interference', hue='delay', df= df, pallete='viridis', order=[1,2], hue_order=[0.2, 7], point_size=1.5,  alpha=0.4, width=0.6 )  
+plt.title('Order & Delay')
+plt.show(block=False)
 ```
 ![](https://github.com/davidbestue/funciones/blob/master/imgs/linares_plot.png)
 
