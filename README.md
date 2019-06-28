@@ -1,3 +1,15 @@
+
+# linares_plot.py  
+
+Linares plot consist of a sina_plot plus a box that contains the mean and the 95% confidence interval done by bootstrap.
+
+```
+linares_plot(x='order', y='interference', hue='delay', df= df, pallete='viridis', order=[1,2], hue_order=[0.2, 7], point_size=1.5,  alpha=0.4, width=0.6 )  
+```
+![](https://github.com/davidbestue/funciones/blob/master/imgs/linares_plot.png)
+
+
+
 # Dot plot function
 
 Example with 1
