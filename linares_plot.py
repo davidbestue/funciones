@@ -15,7 +15,7 @@ import numpy as np
 
    
     
-def linares_plot(x, y, df, pallete, hue=None, order=None, hue_order=None, point_size=1, alpha=0.4, width=0.6 ):
+def linares_plot(x, y, df, pallete, order, hue=None, hue_order=None, point_size=1, alpha=0.4, width=0.6 ):
     
     sinaplot.sinaplot(x=x, y=y, hue=hue, data=df, violin=False, point_size=point_size, palette=pallete,
                       alpha=alpha, order=order, hue_order=hue_order, width=width)
