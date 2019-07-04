@@ -14,14 +14,12 @@ from seaborn_sinaplot import sinaplot ## install at https://github.com/mparker2/
 import numpy as np
 
    
-    
 def linares_plot(x, y, df, pallete, order, hue=None, hue_order=None, point_size=1, alpha=0.4, width=0.6 ):
-    
     sinaplot.sinaplot(x=x, y=y, hue=hue, data=df, violin=False, point_size=point_size, palette=pallete,
                       alpha=alpha, order=order, hue_order=hue_order, width=width)
     if hue==None:
         for i_x, x_idx in enumerate(order):
-            ci = df.groupby(x)[y].apply(lambda n:bootstraps.ci(data=n.values)).iloc[i_x]
+            ci = df.groupby(x)[y].apply(lambda n:bootstraps.ci(data=n.values)).loc[x_idx]
             
             left = i_x - width/2 
             plt.gca().add_patch(Rectangle((left, ci[0]), width, ci[1]-ci[0],alpha=1, fill=False, linewidth=1,
@@ -52,7 +50,6 @@ def linares_plot(x, y, df, pallete, order, hue=None, hue_order=None, point_size=
     plt.gca().spines['top'].set_visible(False)
     plt.gca().get_xaxis().tick_bottom()
     plt.gca().get_yaxis().tick_left()
-    
     
 
     
