@@ -2,7 +2,7 @@
 """
 Created on Thu Feb 21 14:56:24 2019
 
-@author: David Bestue
+@author
 """
 
 ## Functionsfor pupulation vector
