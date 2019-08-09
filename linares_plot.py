@@ -62,7 +62,7 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
 
     
     
-#linares_plot(x='order', y='interference', hue='delay', df= df, pallete='viridis', 
+#linares_plot(x='order', y='interference', hue='delay', df= df, palette='viridis', 
 #              order=[1,2], hue_order=[0.2, 7], point_size=1.5, alpha=0.4, width=0.6 )  
 #plt.title('Order & Delay')
 #plt.show(block=False)
