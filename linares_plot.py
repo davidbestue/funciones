@@ -14,37 +14,31 @@ from seaborn_sinaplot import sinaplot ## install at https://github.com/mparker2/
 import numpy as np
 
    
-def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=1, alpha=0.4, width=0.6 ):
+def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=1, alpha=0.4, width=0.6, statistic=np.mean):
+    
     sinaplot.sinaplot(x=x, y=y, hue=hue, data=df, violin=False, point_size=point_size, palette=palette,
                       alpha=alpha, order=order, hue_order=hue_order, width=width)
     if hue==None:
         for i_x, x_idx in enumerate(order):
-            ci= bootstraps.ci(dfr.groupby(x).get_group(x_idx)[y])
-            #ci = df.groupby(x)[y].apply(lambda n:bootstraps.ci(data=n.values)).loc[x_idx]
-            
-            left = i_x - width/2 
+            ci= bootstraps.ci(dfr.groupby(x).get_group(x_idx)[y], statfunction=statistic, n_samples=10000)
+            m= statistic( df.loc[df[x]==x_idx, y] )
+            left = i_x - width/len(order) 
             plt.gca().add_patch(Rectangle((left, ci[0]), width, ci[1]-ci[0],alpha=1, fill=False, linewidth=1,
                                           edgecolor='black'))
-            m = df.loc[df[x]==x_idx, y].mean()
+            
             plt.plot([left, left+width], [m,m ], 'r', linewidth=1)
     else:
         for i_x, x_idx in enumerate(order):
             for i_h, h_idx in enumerate(hue_order):
                 try:
-                    ci= bootstraps.ci(dfr.groupby(x).get_group(x_idx).groupby(hue).get_group(h_idx)[y], np.mean, n_samples=1000)
-                    #ci = df.groupby(x).get_group(x_idx).groupby(hue)[y].apply(lambda n:bootstraps.ci(data=n.values)).iloc[i_h]
-                    m= df.groupby(x).get_group(x_idx).groupby(hue).get_group(h_idx)[y].mean()
-                    if i_h==0:
-                        bott_left = i_x - width/2
-                    else:
-                        bott_left = i_x 
-
-                    bar_length = width/2 # 0.6/len(df[hue].unique())
+                    ci= bootstraps.ci(dfr.groupby(x).get_group(x_idx).groupby(hue).get_group(h_idx)[y], 
+                                      statfunction=statistic, n_samples=10000)
+                    m= statistic( df.groupby(x).get_group(x_idx).groupby(hue).get_group(h_idx)[y] )
+                    bar_length = width/len(hue_order) 
+                    bott_left = i_x - width/2   + i_h*bar_length
                     plt.gca().add_patch(Rectangle((bott_left, ci[0]), bar_length , ci[1]-ci[0],
                                                   alpha=1, fill=False, linewidth=1, edgecolor='black'))
 
-                    #m = df.loc[(df[x]==x_idx) & (df[hue]==h_idx) , y].mean()    
-                    #print(m, ci, x_idx, h_idx)
                     plt.plot( [bott_left, bott_left+bar_length], [m,m ], 'r', linewidth=1)
                     
                 except:
