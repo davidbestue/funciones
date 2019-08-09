@@ -44,7 +44,7 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
                                                   alpha=1, fill=False, linewidth=1, edgecolor='black'))
 
                     #m = df.loc[(df[x]==x_idx) & (df[hue]==h_idx) , y].mean()    
-                    print(m, ci, x_idx, h_idx)
+                    #print(m, ci, x_idx, h_idx)
                     plt.plot( [bott_left, bott_left+bar_length], [m,m ], 'r', linewidth=1)
                     
                 except:
