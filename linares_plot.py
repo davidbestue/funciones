@@ -31,7 +31,7 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
         for i_x, x_idx in enumerate(order):
             for i_h, h_idx in enumerate(hue_order):
                 try:
-                    ci= bootstraps.ci(dfr.groupby(x).get_group(x_idx).groupby(hue).get_group(h_idx)[y], 
+                    ci= bootstraps.ci(df.groupby(x).get_group(x_idx).groupby(hue).get_group(h_idx)[y], 
                                       statfunction=statistic, n_samples=10000)
                     m= statistic( df.groupby(x).get_group(x_idx).groupby(hue).get_group(h_idx)[y] )
                     bar_length = width/len(hue_order) 
@@ -114,7 +114,7 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
         for i_x, x_idx in enumerate(order):
             for i_h, h_idx in enumerate(hue_order):
                 try:
-                    ci= bootstraps.ci(dfr.groupby(x).get_group(x_idx).groupby(hue).get_group(h_idx)[y], 
+                    ci= bootstraps.ci(df.groupby(x).get_group(x_idx).groupby(hue).get_group(h_idx)[y], 
                                       statfunction=statistic, n_samples=10000)
                     m= statistic( df.groupby(x).get_group(x_idx).groupby(hue).get_group(h_idx)[y] )
                     bar_length = width/len(hue_order) 
@@ -135,3 +135,6 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
     plt.gca().spines['top'].set_visible(False)                                                                                  # remove top spines
     plt.gca().get_xaxis().tick_bottom()                                                                                         
     plt.gca().get_yaxis().tick_left()
+
+
+
