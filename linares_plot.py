@@ -32,6 +32,7 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
             #
             df_by_subj = pd.DataFrame(df_by_subj)
             df_by_subj.columns=[x, y]
+            df_by_subj = df_by_subj[~np.isnan(df_by_subj).iloc[:,1] ]
             sinaplot.sinaplot(x=x, y=y, hue=hue, data=df_by_subj, violin=False, point_size=point_size, palette=palette, 
                 alpha=alpha, order=order, hue_order=hue_order, width=width)
 
@@ -45,6 +46,7 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
             #
             df_by_subj = pd.DataFrame(df_by_subj)
             df_by_subj.columns=[x, hue, y]
+            df_by_subj = df_by_subj[~np.isnan(df_by_subj).iloc[:,2] ]
             sinaplot.sinaplot(x=x, y=y, hue=hue, data=df_by_subj, violin=False, point_size=point_size, palette=palette, 
                 alpha=alpha, order=order, hue_order=hue_order, width=width)
 
