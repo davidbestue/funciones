@@ -62,7 +62,6 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
 #plt.show(block=False)
 
 
-
 def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=1, alpha=0.4, width=0.6, statistic=np.mean, by_subj=False, subj_col=None):
     
     if by_subj==True:
@@ -98,7 +97,7 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
         for i_x, x_idx in enumerate(order):
             ci= bootstraps.ci(df.groupby(x).get_group(x_idx)[y], statfunction=statistic, n_samples=10000)
             m= statistic( df.loc[df[x]==x_idx, y] )
-            left = i_x - width/len(order) 
+            left =  i_x - width/2   #i_x - width/len(order) 
             plt.gca().add_patch(Rectangle((left, ci[0]), width, ci[1]-ci[0],alpha=1, fill=False, linewidth=1,
                                           edgecolor='black'))
             
