@@ -70,8 +70,8 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
     ####
     ####
     #### SINAPLOT
-    if by_subj==True:                                                                                                           # one point per subject
-        if hue==None:                                                                                                           # hue
+    if by_subj==True:                                                                                                           # sinaplpot: one point per subject
+        if hue==None:                                                                                                           # hue for the sinaplot
             df_by_subj=[]
             for x_val in order:
                 for s_subject in df[subj_col].unique():
@@ -83,7 +83,7 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
             sinaplot.sinaplot(x=x, y=y, hue=hue, data=df_by_subj, violin=False, point_size=point_size, palette=palette, 
                 alpha=alpha, order=order, hue_order=hue_order, width=width)
 
-        else:                                                                                                                   #no hue                                                             
+        else:                                                                                                                   #no hue for the sinaplot                                                             
             df_by_subj=[]
             for x_val in order:
                 for h_val in hue_order:
@@ -96,7 +96,7 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
             sinaplot.sinaplot(x=x, y=y, hue=hue, data=df_by_subj, violin=False, point_size=point_size, palette=palette, 
                 alpha=alpha, order=order, hue_order=hue_order, width=width)
 
-    else:                                                                                                                       # one point per trial (default)
+    else:                                                                                                                       # sinaplot: one point per trial (default)
         sinaplot.sinaplot(x=x, y=y, hue=hue, data=df, violin=False, point_size=point_size, palette=palette,
                       alpha=alpha, order=order, hue_order=hue_order, width=width)
 
@@ -138,3 +138,10 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
 
 
 
+
+#linares_plot(x='order', y='interference', hue='delay', df= df, palette='viridis', 
+#              order=[1,2], hue_order=[0.2, 7], point_size=1.5, alpha=0.4, 
+#              width=0.6, by_subj=False, subj_col=None )  
+#
+#plt.title('Order & Delay')
+#plt.show(block=False)
