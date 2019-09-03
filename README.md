@@ -4,12 +4,45 @@ linares_plot.py
 
 Linares plot consist of a sina plot plus a box that contains the mean and the 95% confidence interval done by bootstrap.  
 Yo need to previously install sinaplot from https://github.com/mparker2/seaborn_sinaplot  
+
+You can plot all the trials or subject by subject in the sinaplot
+
+Examples of hue linares plot of (trials & subject)
+
 ```
-linares_plot(x='order', y='interference', hue='delay', df= df, pallete='viridis', order=[1,2], hue_order=[0.2, 7], point_size=1.5,  alpha=0.4, width=0.6 )  
-plt.title('Order & Delay')
-plt.show(block=False)
+linares_plot(x='dist_T_NT', y='distance_A_err', hue='r_T', order=[12,16,20], hue_order=[7.72,13.68],
+             alpha=0.4, palette=['cyan', 'm'], df=df.loc[df['delay']==3], point_size=7, by_subj=True, subj_col='subject')
+plt.plot([-0.1,2.1], [0,0], 'k--');
+#plt.ylim(-8,4);
+plt.title('Angular Perceptual interference')
+plt.xlabel('Distance T - NT (deg)');
+plt.ylabel('Attraction bias (deg)');
+plt.yticks([-8,-4, 0, 4]);
+
 ```
-![](https://github.com/davidbestue/funciones/blob/master/imgs/linares_plot.png)
+![](https://github.com/davidbestue/funciones/blob/master/imgs/linares_hue_subj.png)
+
+
+```
+linares_plot(x='dist_T_NT', y='distance_A_err', hue='r_T', order=[12,16,20], hue_order=[7.72,13.68],
+             alpha=0.4, palette=['cyan', 'm'], df=df.loc[df['delay']==3], point_size=7)
+plt.plot([-0.1,2.1], [0,0], 'k--');
+#plt.ylim(-8,4);
+plt.title('Angular Perceptual interference')
+plt.xlabel('Distance T - NT (deg)');
+plt.ylabel('Attraction bias (deg)');
+plt.yticks([-8,-4, 0, 4]);
+
+```
+
+![](https://github.com/davidbestue/funciones/blob/master/imgs/linares_hue_all.png)
+
+
+Examples of no hue linares plot of (trials & subject)
+
+![](https://github.com/davidbestue/funciones/blob/master/imgs/linares_subj.png)
+
+![](https://github.com/davidbestue/funciones/blob/master/imgs/linares_all.png)
 
 
 
