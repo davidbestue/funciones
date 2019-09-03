@@ -101,16 +101,16 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
                       alpha=alpha, order=order, hue_order=hue_order, width=width)
 
     ##### BOX
-    if hue==None:
-        for i_x, x_idx in enumerate(order):
-            ci= bootstraps.ci(df.groupby(x).get_group(x_idx)[y], statfunction=statistic, n_samples=10000)
-            m= statistic( df.loc[df[x]==x_idx, y] )
-            left =  i_x - width/2   #i_x - width/len(order) 
-            plt.gca().add_patch(Rectangle((left, ci[0]), width, ci[1]-ci[0],alpha=1, fill=False, linewidth=1,
-                                          edgecolor='black'))
-            
-            plt.plot([left, left+width], [m,m ], 'r', linewidth=1)
-    else:
+    if hue==None:                                                                                                               # Box with median and c.i 95%
+        for i_x, x_idx in enumerate(order):                                                                                     # no hue
+            ci= bootstraps.ci(df.groupby(x).get_group(x_idx)[y], statfunction=statistic, n_samples=10000)                       # calculate the bootstrap
+            m= statistic( df.loc[df[x]==x_idx, y] )                                                                             # vallue statistic
+            left =  i_x - width/2   #i_x - width/len(order)                                                                     # position of rectangle
+            plt.gca().add_patch(Rectangle((left, ci[0]), width, ci[1]-ci[0],alpha=1, fill=False, linewidth=1,                   # plot the rectangle 
+                                          edgecolor='black'))                                                                   
+            plt.plot([left, left+width], [m,m ], 'r', linewidth=1)                                                              # plot line mean
+    #        
+    else:                                                                                                                       # hue
         for i_x, x_idx in enumerate(order):
             for i_h, h_idx in enumerate(hue_order):
                 try:
@@ -129,9 +129,9 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
         
         plt.gca().legend(loc= 1, frameon=False)
         #
-    plt.xticks(  np.arange(len(df[x].unique())) , order)
-    plt.xlim(-0.5, len(df[x].unique())-0.5 )
-    plt.gca().spines['right'].set_visible(False)
-    plt.gca().spines['top'].set_visible(False)
-    plt.gca().get_xaxis().tick_bottom()
+    plt.xticks(  np.arange(len(df[x].unique())) , order)                                                                        # Aesthetics of the plot
+    plt.xlim(-0.5, len(df[x].unique())-0.5 )                                                                                    # xlim
+    plt.gca().spines['right'].set_visible(False)                                                                                # remove right spines
+    plt.gca().spines['top'].set_visible(False)                                                                                  # remove top spines
+    plt.gca().get_xaxis().tick_bottom()                                                                                         
     plt.gca().get_yaxis().tick_left()
