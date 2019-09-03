@@ -63,9 +63,15 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
 
 
 def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=1, alpha=0.4, width=0.6, statistic=np.mean, by_subj=False, subj_col=None):
-    
-    if by_subj==True:
-        if hue==None:
+    ####
+    ####
+    ####  This plots consists of a SINAPLOT (plot the trials/subjects) showing the distribution &
+    ####  a BOX with the statistic (mean/median) and with the 95% c.i done by bootstrap.
+    ####
+    ####
+    #### SINAPLOT
+    if by_subj==True:                                                                                                           # one point per subject
+        if hue==None:                                                                                                           # hue
             df_by_subj=[]
             for x_val in order:
                 for s_subject in df[subj_col].unique():
@@ -77,7 +83,7 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
             sinaplot.sinaplot(x=x, y=y, hue=hue, data=df_by_subj, violin=False, point_size=point_size, palette=palette, 
                 alpha=alpha, order=order, hue_order=hue_order, width=width)
 
-        else:
+        else:                                                                                                                   #no hue                                                             
             df_by_subj=[]
             for x_val in order:
                 for h_val in hue_order:
@@ -90,9 +96,11 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
             sinaplot.sinaplot(x=x, y=y, hue=hue, data=df_by_subj, violin=False, point_size=point_size, palette=palette, 
                 alpha=alpha, order=order, hue_order=hue_order, width=width)
 
-    else:
+    else:                                                                                                                       # one point per trial (default)
         sinaplot.sinaplot(x=x, y=y, hue=hue, data=df, violin=False, point_size=point_size, palette=palette,
                       alpha=alpha, order=order, hue_order=hue_order, width=width)
+
+    ##### BOX
     if hue==None:
         for i_x, x_idx in enumerate(order):
             ci= bootstraps.ci(df.groupby(x).get_group(x_idx)[y], statfunction=statistic, n_samples=10000)
