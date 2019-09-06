@@ -57,7 +57,7 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
     ##### BOX
     if hue==None:                                                                                                               # Box with median and c.i 95%
         for i_x, x_idx in enumerate(order):                                                                                     # no hue
-            ci= bootstraps.ci(df.groupby(x).get_group(x_idx)[y], statfunction=statistic, n_samples=10000)                       # calculate the bootstrap
+            ci= bootstraps.ci(df.groupby(x).get_group(x_idx)[y], statfunction=statistic, n_samples=10000)                       # calculate the bootstrap (data no subject base)
             m= statistic( df.loc[df[x]==x_idx, y] )                                                                             # vallue statistic
             left =  i_x - width/2   #i_x - width/len(order)                                                                     # position of rectangle
             plt.gca().add_patch(Rectangle((left, ci[0]), width, ci[1]-ci[0],alpha=1, fill=False, linewidth=1,                   # plot the rectangle 
