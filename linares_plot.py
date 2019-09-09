@@ -167,6 +167,7 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
     if hue==None:                                                                                                               # Box with median and c.i 95%
         for i_x, x_idx in enumerate(order):
             if by_subj==True:
+                ci= bootstraps.ci(df.groupby(x).get_group(x_idx)[y], statfunction=statistic, n_samples=10000)
 
             else:
                 ci= bootstraps.ci(df.groupby(x).get_group(x_idx)[y], statfunction=statistic, n_samples=10000)                   # calculate the bootstrap (data no subject base)
