@@ -123,6 +123,28 @@ from seaborn_sinaplot import sinaplot ## install at https://github.com/mparker2/
 import numpy as np
 
 
+
+def boots_by_subj(data, col_int, col_subj, n_iterations, alpha, stat):
+    #### you give a 2 column df, one column qith the value and the other column with subject index:
+    list_subjects = data[col_subj].unique()
+    sample=[]
+    for n in range(n_iterations):
+        resampled=[]
+        new_sample = list(np.random.randint(0, len(list_subjects), len(list_subjects)))
+        for res_s in new_sample:
+            resampled = resampled + list(data.loc[data[col_subj]==list_subjects[res_s], col_int].values) 
+        #
+        sample.append(stat(resampled))
+    #
+    stats_sorted = np.sort(sample)
+    new_mean=np.mean(sample)
+    return (new_mean, stats_sorted[int((alpha/2.0)*n_iterations)],
+            stats_sorted[int((1-alpha/2.0)*n_iterations)])
+
+
+
+
+
 def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=1, alpha=0.4, width=0.6, statistic=np.mean, by_subj=False, subj_col=None):
     ####
     ####
@@ -170,7 +192,7 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
                 df_boot_bysubj = pd.DataFrame({y: df.groupby(x).get_group(x_idx)[y], subj_col: df.groupby(x).get_group(x_idx)[subj_col]})
                 new_mean, inf_b, sup_b = boots_by_subj(df_boot_bysubj, y, subj_col, n_iterations=100, alpha=0.05, stat=np.mean)
                 ci= np.array([inf_b, sup_b])
-
+            #
             else:
                 ci= bootstraps.ci(df.groupby(x).get_group(x_idx)[y], statfunction=statistic, n_samples=10000)                   # calculate the bootstrap (data no subject base)
             ##
@@ -224,22 +246,3 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
 
 
 
-
-
-
-def boots_by_subj(data, col_int, col_subj, n_iterations, alpha, stat):
-    #### you give a 2 column df, one column qith the value and the other column with subject index:
-    list_subjects = data[col_subj].unique()
-    sample=[]
-    for n in range(n_iterations):
-        resampled=[]
-        new_sample = list(np.random.randint(0, len(list_subjects), len(list_subjects)))
-        for res_s in new_sample:
-            resampled = resampled + list(data.loc[data[col_subj]==list_subjects[res_s], col_int].values) 
-        #
-        sample.append(stat(resampled))
-    #
-    stats_sorted = np.sort(sample)
-    new_mean=np.mean(sample)
-    return (new_mean, stats_sorted[int((alpha/2.0)*n_iterations)],
-            stats_sorted[int((1-alpha/2.0)*n_iterations)])
