@@ -173,8 +173,7 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
 
             else:
                 ci= bootstraps.ci(df.groupby(x).get_group(x_idx)[y], statfunction=statistic, n_samples=10000)                   # calculate the bootstrap (data no subject base)
-                  
-
+            ##
             ####                
             m= statistic( df.loc[df[x]==x_idx, y] )                                                                             # vallue statistic
             left =  i_x - width/2   #i_x - width/len(order)                                                                     # position of rectangle
