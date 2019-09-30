@@ -1,6 +1,12 @@
 
 
+### Aummary and plot of an analysis with random intercept / random intercept +  random slope for 1 parameter
 
+import numpy as np
+import pandas as pd
+import statsmodels.formula.api as smf
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 
 
