@@ -33,6 +33,7 @@ def plot_rand_int(data, x, y, hue, summary=True):
 
 
 
+
 ### Plot of the random slopes
 def plot_rand_slope(data, x, y, hue, summary=True): 
     pal = sns.color_palette("tab10", n_colors=len(list(data[hue].unique())), desat=1).as_hex()
@@ -62,5 +63,7 @@ def plot_rand_slope(data, x, y, hue, summary=True):
 
 ###
 
+
 #Information about the theory of mixed liniar models (random slopes) in http://www.bristol.ac.uk/cmm/learning/videos/random-slopes.html
 #Information to undertand regressions (lasso, simpson paradox..) in the notebook Dropbox/KAROLINSKA/Understanding_of_regressions.ipynb
+
