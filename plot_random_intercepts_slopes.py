@@ -45,14 +45,14 @@ def plot_rand_slope(data, x, y, hue, summary=True):
     slope_each = np.array([mdf.random_effects[N][x] for N in list(data[hue].unique())])    
     intercept_each_subj =  intercept_add_each + mdf.params.Intercept
     slope_each_subj =  slope_each + mdf.params[x]
-    
+    #
     for i, ind in enumerate(list(data[hue].unique())):        
         intercept_s=intercept_each_subj[i]
         slope_s = slope_each_subj[i]
         start_l = data[x].min()
         end_l = data[x].max()
         plt.plot([start_l, end_l], [slope_s*start_l + intercept_s, slope_s*end_l + intercept_s], color=pal[i])
-    
+    #
     if summary==True:
         print(mdf.summary())
 
