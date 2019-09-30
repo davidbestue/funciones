@@ -55,3 +55,12 @@ def plot_rand_slope(data, x, y, hue, summary=True):
     
     if summary==True:
         print(mdf.summary())
+
+
+
+
+
+###
+
+#Information about the theory of mixed liniar models (random slopes) in http://www.bristol.ac.uk/cmm/learning/videos/random-slopes.html
+#Information to undertand regressions (lasso, simpson paradox..) in the notebook Dropbox/KAROLINSKA/Understanding_of_regressions.ipynb
