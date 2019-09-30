@@ -10,6 +10,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 
+### Plot of the random intercepts
 def plot_rand_int(data, x, y, hue, summary=True): 
     pal = sns.color_palette("tab10", n_colors=len(list(data[hue].unique())), desat=1).as_hex()
     sns.lmplot(x, y, data,  hue=hue, hue_order=list(data[hue].unique()),
@@ -32,8 +33,7 @@ def plot_rand_int(data, x, y, hue, summary=True):
 
 
 
-
-
+### Plot of the random slopes
 def plot_rand_slope(data, x, y, hue, summary=True): 
     pal = sns.color_palette("tab10", n_colors=len(list(data[hue].unique())), desat=1).as_hex()
     sns.lmplot(x, y, data,  hue=hue, hue_order=list(data[hue].unique()),
