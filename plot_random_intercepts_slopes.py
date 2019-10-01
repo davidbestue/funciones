@@ -1,7 +1,12 @@
 
-
+####################################
+####################################
+####################################
 ### Aummary and plot of an analysis with random intercept / random intercept +  random slope for 1 parameter
 ### hue is the random intercept parameter for the plot
+####################################
+####################################
+####################################
 
 import numpy as np
 import pandas as pd
