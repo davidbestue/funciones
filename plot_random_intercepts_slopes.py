@@ -14,7 +14,6 @@ import statsmodels.formula.api as smf
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-
 ### Plot of the random intercepts
 def plot_rand_int(data, x, y, hue, summary=True): 
     pal = sns.color_palette("tab10", n_colors=len(list(data[hue].unique())), desat=1).as_hex()
