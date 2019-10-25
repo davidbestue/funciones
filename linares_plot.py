@@ -35,7 +35,6 @@ def boots_by_subj(data, col_int, col_subj, n_iterations, alpha, stat):
 
 
 
-
 def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=1, alpha=0.4, width=0.6, statistic=np.mean, by_subj=False, subj_col=None):
     ####
     ####
