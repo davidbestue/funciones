@@ -4,7 +4,6 @@ Created on Fri Jun 28 12:26:52 2019
 
 @author: David Bestue
 """
-
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
