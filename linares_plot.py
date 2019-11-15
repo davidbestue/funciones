@@ -129,8 +129,8 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
 #              order=[1,2], hue_order=[0.2, 7], point_size=1.5, alpha=0.4, 
 #              width=0.6, by_subj=False, subj_col=None )  
 #
-#plt.title('Order & Delay')
-#plt.show(block=False)
+#plt.title('Order & Delay') # set the title of the plot you want to display
+#plt.show(block=False) ## show it
 
 
 
