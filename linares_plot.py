@@ -12,6 +12,9 @@ import scikits.bootstrap as bootstraps
 from seaborn_sinaplot import sinaplot ## install at https://github.com/mparker2/seaborn_sinaplot
 import numpy as np
 
+### Style of poster for the plots
+sns.set_context("poster", font_scale=1.1)
+sns.set_style("ticks")
 
 
 def boots_by_subj(data, col_int, col_subj, n_iterations, alpha, stat):
@@ -34,7 +37,8 @@ def boots_by_subj(data, col_int, col_subj, n_iterations, alpha, stat):
 
 
 
-def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=1, alpha=0.4, width=0.6, statistic=np.mean, by_subj=False, subj_col=None, plot_box=True):
+def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=1, alpha=0.4, 
+                  width=0.6, statistic=np.mean, by_subj=False, subj_col=None, plot_box=True, MS=12, LW=4):
     ####
     ####
     ####  This plots consists of a SINAPLOT (plot the trials/subjects) showing the distribution &
@@ -75,24 +79,29 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
                       alpha=alpha, order=order, hue_order=hue_order, width=width)
 
     ##### BOX
+    cis=[]
+    stas_m = []
     if hue==None:                                                                                                               # Box with median and c.i 95%
         for i_x, x_idx in enumerate(order):
             if by_subj==True:
                 df_boot_bysubj = pd.DataFrame({y: df.groupby(x).get_group(x_idx)[y], subj_col: df.groupby(x).get_group(x_idx)[subj_col]})
-                new_mean, inf_b, sup_b = boots_by_subj(df_boot_bysubj, y, subj_col, n_iterations=10000, alpha=0.05, stat=np.mean)
+                new_mean, inf_b, sup_b = boots_by_subj(df_boot_bysubj, y, subj_col, n_iterations=100, alpha=0.05, stat=np.mean)
                 ci= np.array([inf_b, sup_b])
+                cis.append(ci)
             #
             else:
-                ci= bootstraps.ci(df.groupby(x).get_group(x_idx)[y], statfunction=statistic, n_samples=10000)                   # calculate the bootstrap (data no subject base)
+                ci= bootstraps.ci(df.groupby(x).get_group(x_idx)[y], statfunction=statistic, n_samples=100)    # calculate the bootstrap (data no subject base)
+                cis.append(ci)
             ##
             ####                
             m= statistic( df.loc[df[x]==x_idx, y] ) 
+            stas_m.append(m)
             if plot_box==True:
                 # vallue statistic
                 left =  i_x - width/2   #i_x - width/len(order)                                                                     # position of rectangle
                 plt.gca().add_patch(Rectangle((left, ci[0]), width, ci[1]-ci[0],alpha=1, fill=False, linewidth=1,                   # plot the rectangle 
-                                              edgecolor='black'))                                                                   
-                plt.plot([left, left+width], [m,m ], 'r', linewidth=1) 
+                                              edgecolor=palette[0]))                                                                   
+                plt.plot([left, left+width], [m,m ], color='k', linewidth=1) 
     #        
     else:                                                                                                                       # hue
         for i_x, x_idx in enumerate(order):
@@ -100,40 +109,63 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
                 try:
                     if by_subj==True:
                         df_boot_bysubj = pd.DataFrame({y: df.groupby(x).get_group(x_idx).groupby(hue).get_group(h_idx)[y], subj_col: df.groupby(x).get_group(x_idx).groupby(hue).get_group(h_idx)[subj_col]})
-                        new_mean, inf_b, sup_b = boots_by_subj(df_boot_bysubj, y, subj_col, n_iterations=10000, alpha=0.05, stat=np.mean)
+                        new_mean, inf_b, sup_b = boots_by_subj(df_boot_bysubj, y, subj_col, n_iterations=100, alpha=0.05, stat=np.mean)
                         ci= np.array([inf_b, sup_b])
+                        cis.append(ci)
                     else:
-                        ci= bootstraps.ci(df.groupby(x).get_group(x_idx).groupby(hue).get_group(h_idx)[y], statfunction=statistic, n_samples=10000)
+                        ci= bootstraps.ci(df.groupby(x).get_group(x_idx).groupby(hue).get_group(h_idx)[y], statfunction=statistic, n_samples=100)
+                        cis.append(ci)
                     #
                     m= statistic( df.groupby(x).get_group(x_idx).groupby(hue).get_group(h_idx)[y] )
+                    stas_m.append(m)
                     if plot_box==True:
                         bar_length = width/len(hue_order) 
                         bott_left = i_x - width/2   + i_h*bar_length
                         plt.gca().add_patch(Rectangle((bott_left, ci[0]), bar_length , ci[1]-ci[0],
-                                                      alpha=1, fill=False, linewidth=1, edgecolor='black'))
-                        plt.plot( [bott_left, bott_left+bar_length], [m,m ], 'r', linewidth=1)
+                                                      alpha=1, fill=False, linewidth=1, edgecolor=palette[i_h]))
+                        plt.plot( [bott_left, bott_left+bar_length], [m,m ], palette[i_h], linewidth=3)
                     
                 except:
                     IndexError
+    
+    if plot_box=='line':
+        if hue == None:
+            means_=stas_m
+            cis_ =cis
+            x_s = np.array(range(len(order)))
+            errors_abs = [abs(cis_[x]-means_[x]) for x in range(len(order))]
+            neg_errors = [errors_abs[x][0] for x in range(len(order))]
+            pos_errors = [errors_abs[x][1] for x in range(len(order))]
+            plt.plot(x_s, means_, marker='o', markersize=MS, color=palette[0])
+            plt.errorbar(x_s, means_, yerr=[neg_errors, pos_errors], color=palette[0], linewidth=LW)
+            
+        else:
+            for i_h, h_idx in enumerate(hue_order):
+                means_hue=stas_m[i_h::(len(hue_order))]
+                cis_hue = cis[i_h::(len(hue_order))] 
+                biases_pos = np.arange(-0.1, 1, 0.2)
+                bias_x = biases_pos[i_h]               
+                x_s = np.array(range(len(order))) + bias_x
+                errors_abs = [abs(cis_hue[x]-means_hue[x]) for x in range(len(order))]
+                neg_errors = [errors_abs[x][0] for x in range(len(order))]
+                pos_errors = [errors_abs[x][1] for x in range(len(order))]
+                plt.plot(x_s, means_hue, marker='o', markersize=MS, color=palette[i_h])
+                plt.errorbar(x_s, means_hue, yerr=[neg_errors, pos_errors], color=palette[i_h], linewidth=LW)
+                
+            
         
-        plt.gca().legend(loc= 1, frameon=False)
-        #
+    
+    
     plt.xticks(  np.arange(len(df[x].unique())) , order)                                                                        # Aesthetics of the plot
     plt.xlim(-0.5, len(df[x].unique())-0.5 )                                                                                    # xlim
     plt.gca().spines['right'].set_visible(False)                                                                                # remove right spines
     plt.gca().spines['top'].set_visible(False)                                                                                  # remove top spines
     plt.gca().get_xaxis().tick_bottom()                                                                                         
     plt.gca().get_yaxis().tick_left()
-
-
-
-
-#linares_plot(x='order', y='interference', hue='delay', df= df, palette='viridis', 
-#              order=[1,2], hue_order=[0.2, 7], point_size=1.5, alpha=0.4, 
-#              width=0.6, by_subj=False, subj_col=None )  
-#
-#plt.title('Order & Delay') # set the title of the plot you want to display
-#plt.show(block=False) ## show it
+    ### Legend
+    l = plt.legend(loc='best', frameon=False, prop={'size': 16})
+    #l.get_texts()[0].set_text('delay=0')
+    
 
 
 
