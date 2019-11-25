@@ -38,7 +38,7 @@ def boots_by_subj(data, col_int, col_subj, n_iterations, alpha, stat):
 
 
 def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=1, alpha=0.4, 
-                  width=0.6, statistic=np.mean, by_subj=False, subj_col=None, plot_box=True, MS=12, LW=4):
+                  width=0.6, statistic=np.mean, by_subj=False, subj_col=None, plot_box=True, MS=12, LW=4, reps=1000):
     ####
     ####
     ####  This plots consists of a SINAPLOT (plot the trials/subjects) showing the distribution &
@@ -85,12 +85,12 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
         for i_x, x_idx in enumerate(order):
             if by_subj==True:
                 df_boot_bysubj = pd.DataFrame({y: df.groupby(x).get_group(x_idx)[y], subj_col: df.groupby(x).get_group(x_idx)[subj_col]})
-                new_mean, inf_b, sup_b = boots_by_subj(df_boot_bysubj, y, subj_col, n_iterations=1000, alpha=0.05, stat=np.mean)
+                new_mean, inf_b, sup_b = boots_by_subj(df_boot_bysubj, y, subj_col, n_iterations=reps, alpha=0.05, stat=np.mean)
                 ci= np.array([inf_b, sup_b])
                 cis.append(ci)
             #
             else:
-                ci= bootstraps.ci(df.groupby(x).get_group(x_idx)[y], statfunction=statistic, n_samples=1000)    # calculate the bootstrap (data no subject base)
+                ci= bootstraps.ci(df.groupby(x).get_group(x_idx)[y], statfunction=statistic, n_samples=reps)    # calculate the bootstrap (data no subject base)
                 cis.append(ci)
             ##
             ####                
@@ -109,11 +109,11 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
                 try:
                     if by_subj==True:
                         df_boot_bysubj = pd.DataFrame({y: df.groupby(x).get_group(x_idx).groupby(hue).get_group(h_idx)[y], subj_col: df.groupby(x).get_group(x_idx).groupby(hue).get_group(h_idx)[subj_col]})
-                        new_mean, inf_b, sup_b = boots_by_subj(df_boot_bysubj, y, subj_col, n_iterations=1000, alpha=0.05, stat=np.mean)
+                        new_mean, inf_b, sup_b = boots_by_subj(df_boot_bysubj, y, subj_col, n_iterations=reps, alpha=0.05, stat=np.mean)
                         ci= np.array([inf_b, sup_b])
                         cis.append(ci)
                     else:
-                        ci= bootstraps.ci(df.groupby(x).get_group(x_idx).groupby(hue).get_group(h_idx)[y], statfunction=statistic, n_samples=1000)
+                        ci= bootstraps.ci(df.groupby(x).get_group(x_idx).groupby(hue).get_group(h_idx)[y], statfunction=statistic, n_samples=reps)
                         cis.append(ci)
                     #
                     m= statistic( df.groupby(x).get_group(x_idx).groupby(hue).get_group(h_idx)[y] )
