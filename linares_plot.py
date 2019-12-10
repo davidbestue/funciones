@@ -187,9 +187,9 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
     plt.gca().spines['top'].set_visible(False)                                                                                  # remove top spines
     plt.gca().get_xaxis().tick_bottom()                                                                                         
     plt.gca().get_yaxis().tick_left()
-    plt.gca().tick_params(direction='in')
+    plt.gca().tick_params(direction='in') #direction
     adjust_spines(plt.gca(), ['left', 'bottom'])
-    ### Legend
+    ## Legend
     l = plt.legend(loc='best', frameon=False, prop={'size': 16})
     #l.get_texts()[0].set_text('delay=0')
     
