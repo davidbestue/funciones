@@ -37,6 +37,31 @@ def boots_by_subj(data, col_int, col_subj, n_iterations, alpha, stat):
 
 
 
+
+def adjust_spines(ax, spines):  ### aesthetics, offset axies 
+    for loc, spine in ax.spines.items():
+        if loc in spines:
+            spine.set_position(('outward', 20))  # outward by 10 points
+            spine.set_smart_bounds(True)
+        else:
+            spine.set_color('none')  # don't draw spine
+
+    # turn off ticks where there is no spine
+    if 'left' in spines:
+        ax.yaxis.set_ticks_position('left')
+    else:
+        # no yaxis ticks
+        ax.yaxis.set_ticks([])
+
+    if 'bottom' in spines:
+        ax.xaxis.set_ticks_position('bottom')
+    else:
+        # no xaxis ticks
+        ax.xaxis.set_ticks([])
+
+
+
+
 def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=1, alpha=0.4, 
                   width=0.6, statistic=np.mean, by_subj=False, subj_col=None, plot_box=True, MS=12, LW=4, reps=1000):
     ####
@@ -163,6 +188,7 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
     plt.gca().get_xaxis().tick_bottom()                                                                                         
     plt.gca().get_yaxis().tick_left()
     plt.gca().tick_params(direction='in')
+    adjust_spines(plt.gca(), ['left', 'bottom'])
     ### Legend
     l = plt.legend(loc='best', frameon=False, prop={'size': 16})
     #l.get_texts()[0].set_text('delay=0')
