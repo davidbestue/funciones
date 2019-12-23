@@ -63,7 +63,7 @@ def adjust_spines(ax, spines):  ### aesthetics, offset axies
 
 
 def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=1, alpha=0.4, 
-                  width=0.6, statistic=np.mean, by_subj=False, subj_col=None, plot_box=True, MS=12, LW=4, reps=1000):
+                  width=0.6, statistic=np.mean, by_subj=False, subj_col=None, plot_box=True, MS=12, LW=4, reps=10000):
     ####
     ####
     ####  This plots consists of a SINAPLOT (plot the trials/subjects) showing the distribution &
