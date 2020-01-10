@@ -125,7 +125,7 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
                 # vallue statistic
                 left =  i_x - width/2   #i_x - width/len(order)                                                                     # position of rectangle
                 plt.gca().add_patch(Rectangle((left, ci[0]), width, ci[1]-ci[0],alpha=1, fill=False, linewidth=1,                   # plot the rectangle 
-                                              edgecolor=palette[0]))                                                                   
+                                              edgecolor=palette[i_x]))                                                                   
                 plt.plot([left, left+width], [m,m ], color='k', linewidth=1) 
     #        
     else:                                                                                                                       # hue
