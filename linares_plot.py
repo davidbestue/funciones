@@ -183,7 +183,7 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
     
     plt.xticks(  np.arange(len(df[x].unique())) , order)                                                                        # Aesthetics of the plot
     plt.xlim(-0.5, len(df[x].unique())-0.5 )                                                                                    # xlim
-    plt.gca().spines['right'].set_visible(False)                                                                                # remove right spines
+    plt.gca().spines['right'].set_visible(False)  ## aesthetics                                                                              # remove right spines
     plt.gca().spines['top'].set_visible(False)                                                                                  # remove top spines
     plt.gca().get_xaxis().tick_bottom()                                                                                         
     plt.gca().get_yaxis().tick_left()
