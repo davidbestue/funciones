@@ -138,7 +138,7 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
                         ci= np.array([inf_b, sup_b])
                         cis.append(ci)
                     else:
-                        ci= bootstraps.ci(df.groupby(x).get_group(x_idx).groupby(hue).get_group(h_idx)[y], statfunction=statistic, n_samples=reps)
+                        ci= bootstraps.ci(df.groupby(x).get_group(x_idx).groupby(hue).get_group(h_idx)[y], statfunction=statistic,  alpha=1-CI, n_samples=reps)
                         cis.append(ci)
                     #
                     m= statistic( df.groupby(x).get_group(x_idx).groupby(hue).get_group(h_idx)[y] )
@@ -187,7 +187,8 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
             neg_errors = [errors_abs[x][0] for x in range(len(order))]
             pos_errors = [errors_abs[x][1] for x in range(len(order))]
             [plt.plot(x_s[n], means_[n], marker='o', markersize=MS, color=palette[n], linewidth=0) for n in range(len(means_))]
-            [plt.errorbar(x_s[n], means_[n], yerr=[[neg_errors[n], pos_errors[n] ]], color=palette[n], linewidth=0, elinewidth=LW ) for n in range(len(means_))]
+            [plt.errorbar(x_s[n], means_[n], yerr=[[neg_errors[n], pos_errors[n] ]], color=palette[n], 
+                linewidth=0, elinewidth=LW ) for n in range(len(means_))]
             
         else:
             for i_h, h_idx in enumerate(hue_order):
@@ -200,7 +201,8 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
                 neg_errors = [errors_abs[x][0] for x in range(len(order))]
                 pos_errors = [errors_abs[x][1] for x in range(len(order))]
                 plt.plot(x_s, means_hue, marker='o', markersize=MS, color=palette[i_h], linewidth=0)
-                plt.errorbar(x_s, means_hue, yerr=[neg_errors, pos_errors], color=palette[i_h], linewidth=0, elinewidth=LW)
+                plt.errorbar(x_s, means_hue, yerr=[neg_errors, pos_errors], color=palette[i_h], 
+                    linewidth=0, elinewidth=LW)
                 
             
         
