@@ -176,6 +176,31 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
                 pos_errors = [errors_abs[x][1] for x in range(len(order))]
                 plt.plot(x_s, means_hue, marker='o', markersize=MS, color=palette[i_h])
                 plt.errorbar(x_s, means_hue, yerr=[neg_errors, pos_errors], color=palette[i_h], linewidth=LW)
+                #
+    ##
+    if plot_box=='mean':
+        if hue == None:
+            means_=stas_m
+            cis_ =cis
+            x_s = np.array(range(len(order)))
+            errors_abs = [abs(cis_[x]-means_[x]) for x in range(len(order))]
+            neg_errors = [errors_abs[x][0] for x in range(len(order))]
+            pos_errors = [errors_abs[x][1] for x in range(len(order))]
+            [plt.plot(x_s[n], means_[n], marker='o', markersize=MS, color=palette[n], linewidth=0) for n in range(len(means_))]
+            [plt.errorbar(x_s[n], means_[n], yerr=[[neg_errors[n], pos_errors[n] ]], color=palette[n], linewidth=0, elinewidth=LW ) for n in range(len(means_))]
+            
+        else:
+            for i_h, h_idx in enumerate(hue_order):
+                means_hue=stas_m[i_h::(len(hue_order))]
+                cis_hue = cis[i_h::(len(hue_order))] 
+                biases_pos = np.arange(-0.1, 1, 0.2)
+                bias_x = biases_pos[i_h]               
+                x_s = np.array(range(len(order))) + bias_x
+                errors_abs = [abs(cis_hue[x]-means_hue[x]) for x in range(len(order))]
+                neg_errors = [errors_abs[x][0] for x in range(len(order))]
+                pos_errors = [errors_abs[x][1] for x in range(len(order))]
+                plt.plot(x_s, means_hue, marker='o', markersize=MS, color=palette[i_h], linewidth=0)
+                plt.errorbar(x_s, means_hue, yerr=[neg_errors, pos_errors], color=palette[i_h], linewidth=0, elinewidth=LW)
                 
             
         
