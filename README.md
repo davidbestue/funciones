@@ -7,6 +7,8 @@ Yo need to previously install sinaplot from https://github.com/mparker2/seaborn_
 
 You can plot all the trials or subject by subject in the sinaplot
 
+Now you can also plto the line or just the CI (also define the range 95 if comparing to 0 and 69 if compearing two lines).  
+
 Examples of hue linares plot of (trials & subject)
 
 ```
