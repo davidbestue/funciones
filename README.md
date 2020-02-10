@@ -11,6 +11,33 @@ Now you can also plto the line or just the CI (also define the range 95 if compa
 
 Examples of hue linares plot of (trials & subject)
 
+
+### Plot box:  
+```
+linares_plot(x='radius', y='tuning_std_deg', order=[1,2,3], CI=0.95,
+             alpha=0.4, palette=[c_tuning], df=df_m, point_size=7, plot_box=True, LW=5, MS=10, reps=1000)
+```
+
+![](https://github.com/davidbestue/funciones/blob/master/imgs/box.png)
+
+
+```
+linares_plot(x='radius', y='tuning_std_deg', order=[1,2,3], CI=0.95,
+             alpha=0.4, palette=[c_tuning], df=df_m, point_size=7, plot_box='line', LW=5, MS=10, reps=1000)
+
+```
+
+![](https://github.com/davidbestue/funciones/blob/master/imgs/line.png)
+
+```
+linares_plot(x='radius', y='tuning_std_deg', order=[1,2,3], CI=0.95,
+             alpha=0.4, palette=[c_tuning], df=df_m, point_size=7, plot_box='mean', LW=5, MS=10, reps=1000)
+
+```
+![](https://github.com/davidbestue/funciones/blob/master/imgs/mean.png)
+
+
+
 ```
 linares_plot(x='dist_T_NT', y='distance_A_err', hue='r_T', order=[12,16,20], hue_order=[7.72,13.68],
              alpha=0.4, palette=['cyan', 'm'], df=df.loc[df['delay']==3], point_size=7, by_subj=True, subj_col='subject')
