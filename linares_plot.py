@@ -123,10 +123,14 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
             stas_m.append(m)
             if plot_box==True:
                 # vallue statistic
-                left =  i_x - width/2   #i_x - width/len(order)                                                                     # position of rectangle
-                plt.gca().add_patch(Rectangle((left, ci[0]), width, ci[1]-ci[0],alpha=1, fill=False, linewidth=1,                   # plot the rectangle 
-                                              edgecolor=palette[i_x]))                                                                   
-                plt.plot([left, left+width], [m,m ], color='k', linewidth=1) 
+                left =  i_x - width/2   #i_x - width/len(order)  
+                if len(palette)>1:
+                    # position of rectangle
+                    plt.gca().add_patch(Rectangle((left, ci[0]), width, ci[1]-ci[0],alpha=1, fill=False, linewidth=1,  edgecolor=palette[i_x]))                 # plot the rectangle 
+                    plt.plot([left, left+width], [m,m ], color='k', linewidth=1) 
+                else:
+                    plt.gca().add_patch(Rectangle((left, ci[0]), width, ci[1]-ci[0],alpha=1, fill=False, linewidth=1,  edgecolor=palette[0]))                 # plot the rectangle 
+                    plt.plot([left, left+width], [m,m ], color='k', linewidth=1) 
     #        
     else:                                                                                                                       # hue
         for i_x, x_idx in enumerate(order):
@@ -186,9 +190,14 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
             errors_abs = [abs(cis_[x]-means_[x]) for x in range(len(order))]
             neg_errors = [errors_abs[x][0] for x in range(len(order))]
             pos_errors = [errors_abs[x][1] for x in range(len(order))]
-            [plt.plot(x_s[n], means_[n], marker='o', markersize=MS, color=palette[n], linewidth=0) for n in range(len(means_))]
-            [plt.errorbar(x_s[n], means_[n], yerr=[[neg_errors[n], pos_errors[n] ]], color=palette[n], 
-                linewidth=0, elinewidth=LW ) for n in range(len(means_))]
+            if len(palette)>1:
+                [plt.plot(x_s[n], means_[n], marker='o', markersize=MS, color=palette[n], linewidth=0) for n in range(len(means_))]
+                [plt.errorbar(x_s[n], means_[n], yerr=[[neg_errors[n], pos_errors[n] ]], color=palette[n], 
+                    linewidth=0, elinewidth=LW ) for n in range(len(means_))]
+            else:
+                [plt.plot(x_s[n], means_[n], marker='o', markersize=MS, color=palette[0], linewidth=0) for n in range(len(means_))]
+                [plt.errorbar(x_s[n], means_[n], yerr=[[neg_errors[n], pos_errors[n] ]], color=palette[0], 
+                    linewidth=0, elinewidth=LW ) for n in range(len(means_))]
             
         else:
             for i_h, h_idx in enumerate(hue_order):
