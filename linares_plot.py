@@ -229,7 +229,7 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
     if leg==True:
         l = plt.legend(loc='best', frameon=False, prop={'size': 16})
     if leg==False:
-        l = plt.legend(False)
+        l = plt.legend(loc='best', frameon=False, prop={'size': 0})
     #l.get_texts()[0].set_text('delay=0')
     
 
