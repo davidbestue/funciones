@@ -169,7 +169,7 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
             plt.errorbar(x_s, means_, yerr=[neg_errors, pos_errors], color=palette[0], linewidth=LW)
             
         else:
-            for i_h, h_idx in enumerate(hue_order):
+            for i_h, h_idx in enumerate(hue_order): ##
                 means_hue=stas_m[i_h::(len(hue_order))]
                 cis_hue = cis[i_h::(len(hue_order))] 
                 biases_pos = np.arange(-0.1, 1, 0.2)
