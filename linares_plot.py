@@ -41,7 +41,7 @@ def adjust_spines(ax, spines):  ### aesthetics, offset axies
     for loc, spine in ax.spines.items():
         if loc in spines:
             spine.set_position(('outward', 20))  # outward by 10 points
-            spine.set_smart_bounds(True)
+            ### spine.set_smart_bounds(True) ##comment if you want to be free to set the ylims by your own
         else:
             spine.set_color('none')  # don't draw spine
 
