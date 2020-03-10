@@ -26,7 +26,7 @@ linares_plot(x='Response', y='EventBaseline', order=['Correct', 'Wrong'], df=df,
             alpha=0.2, point_size=7, reps=50)
 ```
 
-![](https://github.com/davidbestue/funciones/blob/master/imgs/box_standard.PNG)
+![](https://github.com/davidbestue/funciones/blob/master/imgs/box_standard.png)
 
 
 ### Plot Box by subject:  
@@ -37,7 +37,7 @@ linares_plot(x='Response', y='EventBaseline', order=['Correct', 'Wrong'], df=df,
             alpha=0.2, point_size=7,  by_subj=True, subj_col='SubjectName', reps=50)
 ```
 
-![](https://github.com/davidbestue/funciones/blob/master/imgs/bysubj_boxwhite.PNG)
+![](https://github.com/davidbestue/funciones/blob/master/imgs/bysubj_boxwhite.png)
 
 
 By subject, no hue, ***fill the box***: use the argument fill_box=True and the alpha_box to set the opacity.  
@@ -47,7 +47,7 @@ linares_plot(x='Response', y='EventBaseline', order=['Correct', 'Wrong'], df=df,
             alpha=0.2, point_size=7,  by_subj=True, subj_col='SubjectName', reps=50, fill_box=True, alpha_box=0.2)
 ```
 
-![](https://github.com/davidbestue/funciones/blob/master/imgs/bysubj_boxcolor.PNG)
+![](https://github.com/davidbestue/funciones/blob/master/imgs/bysubj_boxcolor.png)
 
 
 
@@ -63,7 +63,7 @@ linares_plot(x='Response', y='EventBaseline', order=['Correct', 'Wrong'], df=df,
 
 ```
 
-![](https://github.com/davidbestue/funciones/blob/master/imgs/hue_bysubj.PNG)
+![](https://github.com/davidbestue/funciones/blob/master/imgs/hue_bysubj.png)
 
 
 
@@ -74,7 +74,7 @@ linares_plot(x='CenteredLevel', y='EventBaseline', order=[-2,-1,0,1,2], df=df, p
             alpha=0.2, point_size=7,  by_subj=True, subj_col='SubjectName', reps=50, plot_box='line')
 
 ```
-![](https://github.com/davidbestue/funciones/blob/master/imgs/line_bysubj.PNG)
+![](https://github.com/davidbestue/funciones/blob/master/imgs/line_bysubj.png)
 
 
 
