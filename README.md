@@ -3,7 +3,7 @@
 linares_plot.py    
 
 Linares plot consist of a ***sinaplot*** plus a box that contains the mean and the 95% confidence interval done by bootstrap.  
-***You need to install sinaplot from https://github.com/mparker2/seaborn_sinaplot  ***
+***You need to install sinaplot from https://github.com/mparker2/seaborn_sinaplot***
 
 You need to have the seaborn_sinaplot folder in your site-packages, as the function calls it as follows:  
 from seaborn_sinaplot import sinaplot.
