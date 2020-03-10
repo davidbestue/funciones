@@ -87,7 +87,7 @@ linares_plot(x='CenteredLevel', y='EventBaseline', order=[-2,-1,0,1,2], df=df, p
             alpha=0.2, point_size=7,  by_subj=True, subj_col='SubjectName', reps=50, plot_box='mean')
 
 ```
-![](https://github.com/davidbestue/funciones/blob/master/imgs/mean_bysubj.PNG)
+![](https://github.com/davidbestue/funciones/blob/master/imgs/mean_bysubj.png)
 
 
 
