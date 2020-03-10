@@ -25,7 +25,7 @@ Examples of hue linares plot of (trials & subject)
 
 
 ### Plot Box:  
-All the data, no hue
+All the data, no hue. Extremes of the box are 95% confidence interval.  
 ```
 linares_plot(x='Response', y='EventBaseline', order=['Correct', 'Wrong'], df=df, palette=[c_correct, c_wrong], 
             alpha=0.2, point_size=7, reps=50)
