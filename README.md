@@ -78,6 +78,18 @@ linares_plot(x='CenteredLevel', y='EventBaseline', order=[-2,-1,0,1,2], df=df, p
 
 
 
+### Plot line hue: 
+Instead of the box, use a line to connect the data (continious x). Use the argument:  plot_box='line'
+```
+linares_plot(x='CenteredLevel', y='EventBaseline', order=[-2,-1,0,1,2], hue='Response',
+             hue_order=['Correct', 'Wrong'],  palette=[c_correct, c_wrong], 
+             df=df, CI=0.68, alpha=0.2, point_size=7,  by_subj=True, subj_col='SubjectName', reps=50, plot_box='line')
+
+```
+![](https://github.com/davidbestue/funciones/blob/master/imgs/line_hue_bysubj.png)
+
+
+
 ### Plot mean: 
 Instead of the box, use just the mean and the error bars. Use the argument:  plot_box='mean'.  
 The Confidence interval is defined with the argument CI (in all the plots). Default is 0.95.  
