@@ -3,7 +3,12 @@
 linares_plot.py    
 
 Linares plot consist of a ***sinaplot*** plus a box that contains the mean and the 95% confidence interval done by bootstrap.  
-Yo need to previously install sinaplot from https://github.com/mparker2/seaborn_sinaplot  
+***You need to install sinaplot from https://github.com/mparker2/seaborn_sinaplot  ***
+
+You need to have the seaborn_sinaplot folder in your site-packages, as the function calls it as follows:  
+from seaborn_sinaplot import sinaplot.
+
+It also requires ***numpy***, ***pandas***, ***matplotlib***, ***seaborn*** and ***scikits*** (they are usaually installed).  
 
 You can plot all the trials or subject by subject in the sinaplot.
 You can decide the range of CI (also define the range 95 if comparing to 0 and 69 if compearing two lines).  
@@ -101,6 +106,24 @@ linares_plot(x='CenteredLevel', y='EventBaseline', order=[-2,-1,0,1,2], df=df, p
 
 ```
 ![](https://github.com/davidbestue/funciones/blob/master/imgs/mean_bysubj.png)
+
+
+
+def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=1, alpha=0.4, CI=0.95,
+                  width=0.6, statistic=np.mean, by_subj=False, subj_col=None, plot_box=True, MS=12, LW=4, 
+                  reps=10000, leg=True, fill_box=False, alpha_box=1)
+
+
+
+
+You can also control other aspects of the plot with extra arguments we have not been presented yet:  
+***point_size***: size of the sinaplot dots.  
+***MS***: Marker sike on the line or mean plot.  
+***LW***: Line width of the line plot.  
+***width***: Width of the sinaplot.  
+***reps***: numer of repetitions for the bootstrap.  
+***statistic***: statistic to use (usually mean, but could be median)
+***leg***: legend  
 
 
 
