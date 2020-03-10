@@ -1,5 +1,5 @@
 
-# Linares plot.  
+# Linares plot  
 linares_plot.py    
 
 Linares plot consist of a ***sinaplot*** plus a box that contains the mean and the 95% confidence interval done by bootstrap.  
