@@ -62,7 +62,8 @@ def adjust_spines(ax, spines):  ### aesthetics, offset axies
 
 
 def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=1, alpha=0.4, CI=0.95,
-                  width=0.6, statistic=np.mean, by_subj=False, subj_col=None, plot_box=True, MS=12, LW=4, reps=10000, leg=True):
+                  width=0.6, statistic=np.mean, by_subj=False, subj_col=None, plot_box=True, MS=12, LW=4, 
+                  reps=10000, leg=True, fill_box=False, alpha_box=1):
     ####
     ####
     ####
@@ -123,14 +124,25 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
             stas_m.append(m)
             if plot_box==True:
                 # vallue statistic
-                left =  i_x - width/2   #i_x - width/len(order)  
-                if len(palette)>1:
-                    # position of rectangle
-                    plt.gca().add_patch(Rectangle((left, ci[0]), width, ci[1]-ci[0],alpha=1, fill=False, linewidth=1,  edgecolor=palette[i_x]))                 # plot the rectangle 
-                    plt.plot([left, left+width], [m,m ], color='k', linewidth=1) 
-                else:
-                    plt.gca().add_patch(Rectangle((left, ci[0]), width, ci[1]-ci[0],alpha=1, fill=False, linewidth=1,  edgecolor=palette[0]))                 # plot the rectangle 
-                    plt.plot([left, left+width], [m,m ], color='k', linewidth=1) 
+                left =  i_x - width/2   #i_x - width/len(order) 
+                if fill_box==False: 
+                    if len(palette)>1:
+                        # position of rectangle
+                        plt.gca().add_patch(Rectangle((left, ci[0]), width, ci[1]-ci[0],alpha=alpha_box, fill=False, linewidth=1,  edgecolor=palette[i_x]))                 # plot the rectangle 
+                        plt.plot([left, left+width], [m,m ], color='k', linewidth=1) 
+                    else:
+                        plt.gca().add_patch(Rectangle((left, ci[0]), width, ci[1]-ci[0],alpha=alpha_box, fill=False, linewidth=1,  edgecolor=palette[0]))                 # plot the rectangle 
+                        plt.plot([left, left+width], [m,m ], color='k', linewidth=1) 
+                elif fill_box==True:
+                    if len(palette)>1:
+                        # position of rectangle
+                        plt.gca().add_patch(Rectangle((left, ci[0]), width, ci[1]-ci[0],alpha=alpha_box, fill=True, facecolor=palette[i_x], 
+                        linewidth=1,  edgecolor=palette[i_x]))                 # plot the rectangle 
+                        plt.plot([left, left+width], [m,m ], color='k', linewidth=1) 
+                    else:
+                        plt.gca().add_patch(Rectangle((left, ci[0]), width, ci[1]-ci[0],alpha=alpha_box, fill=True, facecolor=palette[0], 
+                        linewidth=1, edgecolor=palette[0]))                 # plot the rectangle 
+                        plt.plot([left, left+width], [m,m ], color='k', linewidth=1) 
     #        
     else:                                                                                                                       # hue
         for i_x, x_idx in enumerate(order):
@@ -148,11 +160,19 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
                     m= statistic( df.groupby(x).get_group(x_idx).groupby(hue).get_group(h_idx)[y] )
                     stas_m.append(m)
                     if plot_box==True:
-                        bar_length = width/len(hue_order) 
-                        bott_left = i_x - width/2   + i_h*bar_length
-                        plt.gca().add_patch(Rectangle((bott_left, ci[0]), bar_length , ci[1]-ci[0],
-                                                      alpha=1, fill=False, linewidth=1, edgecolor=palette[i_h]))
-                        plt.plot( [bott_left, bott_left+bar_length], [m,m ], palette[i_h], linewidth=3)
+                        if fill_box==False:
+                            bar_length = width/len(hue_order) 
+                            bott_left = i_x - width/2   + i_h*bar_length
+                            plt.gca().add_patch(Rectangle((bott_left, ci[0]), bar_length , ci[1]-ci[0],
+                                                          alpha=1, fill=False, linewidth=1, edgecolor=palette[i_h]))
+                            plt.plot( [bott_left, bott_left+bar_length], [m,m ], palette[i_h], linewidth=3)
+                        elif fill_box==True:
+                            bar_length = width/len(hue_order) 
+                            bott_left = i_x - width/2   + i_h*bar_length
+                            plt.gca().add_patch(Rectangle((bott_left, ci[0]), bar_length , ci[1]-ci[0], 
+                                                            alpha=alpha_box, fill=True, facecolor=palette[i_h], linewidth=1, edgecolor=palette[i_h]))
+                            plt.plot( [bott_left, bott_left+bar_length], [m,m ], palette[i_h], linewidth=3)
+
                     
                 except:
                     IndexError
