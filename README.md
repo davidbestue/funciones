@@ -2,80 +2,92 @@
 # Linares plot.  
 linares_plot.py    
 
-Linares plot consist of a sina plot plus a box that contains the mean and the 95% confidence interval done by bootstrap.  
+Linares plot consist of a ***sinaplot*** plus a box that contains the mean and the 95% confidence interval done by bootstrap.  
 Yo need to previously install sinaplot from https://github.com/mparker2/seaborn_sinaplot  
 
-You can plot all the trials or subject by subject in the sinaplot
+You can plot all the trials or subject by subject in the sinaplot.
+You can decide the range of CI (also define the range 95 if comparing to 0 and 69 if compearing two lines).  
+The CI is always calculated by bootstrap. If you decide to plot subject by subject, the CI is calculated accordingly.  
+This is decided with the argument: ***by_subj=True***
+(You shuffle radomly when plotting all data (when False) or you shuffle keeping the subjects structure when plotting the subjects mean (when True).  
 
-Now you can also plto the line or just the CI (also define the range 95 if comparing to 0 and 69 if compearing two lines).  
+The legend is also implemented in a fancy way: no box and the text in color. The legend juts appears when there is "hue".  
+
+The box can be filled or not
+
 
 Examples of hue linares plot of (trials & subject)
 
 
-### Plot box:  
+### Plot Box:  
+All the data, no hue
 ```
-linares_plot(x='radius', y='tuning_std_deg', order=[1,2,3], CI=0.95,
-             alpha=0.4, palette=[c_tuning], df=df_m, point_size=7, plot_box=True, LW=5, MS=10, reps=1000)
+linares_plot(x='Response', y='EventBaseline', order=['Correct', 'Wrong'], df=df, palette=[c_correct, c_wrong], 
+            alpha=0.2, point_size=7, reps=50)
 ```
 
-![](https://github.com/davidbestue/funciones/blob/master/imgs/box.PNG)
+![](https://github.com/davidbestue/funciones/blob/master/imgs/box_standard.PNG)
+
+
+### Plot Box by subject:  
+By subject, no hue, no fill the box
+
+```
+linares_plot(x='Response', y='EventBaseline', order=['Correct', 'Wrong'], df=df, palette=[c_correct, c_wrong], 
+            alpha=0.2, point_size=7,  by_subj=True, subj_col='SubjectName', reps=50)
+```
+
+![](https://github.com/davidbestue/funciones/blob/master/imgs/bysubj_boxwhite.PNG)
+
+
+By subject, no hue, ***fill the box***: use the argument fill_box=True and the alpha_box to set the opacity.  
+
+```
+linares_plot(x='Response', y='EventBaseline', order=['Correct', 'Wrong'], df=df, palette=[c_correct, c_wrong], 
+            alpha=0.2, point_size=7,  by_subj=True, subj_col='SubjectName', reps=50, fill_box=True, alpha_box=0.2)
+```
+
+![](https://github.com/davidbestue/funciones/blob/master/imgs/bysubj_boxcolor.PNG)
+
+
+
+### Plot Box hue: 
+
+Add a hue and a legend. 
+```
+linares_plot(x='Response', y='EventBaseline', order=['Correct', 'Wrong'], df=df, palette=[c_correct, c_wrong], 
+             hue='pers_l', hue_order=['High', 'Low'],
+            alpha=0.2, point_size=7,  by_subj=True, subj_col='SubjectName', reps=50,
+            fill_box=True, alpha_box=0.2)
+
+
+```
+
+![](https://github.com/davidbestue/funciones/blob/master/imgs/hue_bysubj.PNG)
 
 
 
 ### Plot line: 
+Instead of the box, use a line to connect the data (continious x). Use the argument:  plot_box='line'
 ```
-linares_plot(x='radius', y='tuning_std_deg', order=[1,2,3], CI=0.95,
-             alpha=0.4, palette=[c_tuning], df=df_m, point_size=7, plot_box='line', LW=5, MS=10, reps=1000)
+linares_plot(x='CenteredLevel', y='EventBaseline', order=[-2,-1,0,1,2], df=df, palette=['navy'], 
+            alpha=0.2, point_size=7,  by_subj=True, subj_col='SubjectName', reps=50, plot_box='line')
 
 ```
+![](https://github.com/davidbestue/funciones/blob/master/imgs/line_bysubj.PNG)
 
-![](https://github.com/davidbestue/funciones/blob/master/imgs/line.PNG)
+
 
 ### Plot mean: 
+Instead of the box, use just the mean and the error bars. Use the argument:  plot_box='mean'.  
+The Confidence interval is defined with the argument CI (in all the plots). Default is 0.95.  
 
 ```
-linares_plot(x='radius', y='tuning_std_deg', order=[1,2,3], CI=0.95,
-             alpha=0.4, palette=[c_tuning], df=df_m, point_size=7, plot_box='mean', LW=5, MS=10, reps=1000)
+linares_plot(x='CenteredLevel', y='EventBaseline', order=[-2,-1,0,1,2], df=df, palette=['navy'], CI=0.68,
+            alpha=0.2, point_size=7,  by_subj=True, subj_col='SubjectName', reps=50, plot_box='mean')
 
 ```
-![](https://github.com/davidbestue/funciones/blob/master/imgs/mean.PNG)
-
-
-
-```
-linares_plot(x='dist_T_NT', y='distance_A_err', hue='r_T', order=[12,16,20], hue_order=[7.72,13.68],
-             alpha=0.4, palette=['cyan', 'm'], df=df.loc[df['delay']==3], point_size=7, by_subj=True, subj_col='subject')
-plt.plot([-0.1,2.1], [0,0], 'k--');
-#plt.ylim(-8,4);
-plt.title('Angular Perceptual interference')
-plt.xlabel('Distance T - NT (deg)');
-plt.ylabel('Attraction bias (deg)');
-plt.yticks([-8,-4, 0, 4]);
-
-```
-![](https://github.com/davidbestue/funciones/blob/master/imgs/linares_hue_subj.png)
-
-
-```
-linares_plot(x='dist_T_NT', y='distance_A_err', hue='r_T', order=[12,16,20], hue_order=[7.72,13.68],
-             alpha=0.4, palette=['cyan', 'm'], df=df.loc[df['delay']==3], point_size=7)
-plt.plot([-0.1,2.1], [0,0], 'k--');
-#plt.ylim(-8,4);
-plt.title('Angular Perceptual interference')
-plt.xlabel('Distance T - NT (deg)');
-plt.ylabel('Attraction bias (deg)');
-plt.yticks([-8,-4, 0, 4]);
-
-```
-
-![](https://github.com/davidbestue/funciones/blob/master/imgs/linares_hue_all.png)
-
-
-Examples of no hue linares plot of (trials & subject)
-
-![](https://github.com/davidbestue/funciones/blob/master/imgs/linares_subj.png)
-
-![](https://github.com/davidbestue/funciones/blob/master/imgs/linares_all.png)
+![](https://github.com/davidbestue/funciones/blob/master/imgs/mean_bysubj.PNG)
 
 
 
