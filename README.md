@@ -91,6 +91,7 @@ linares_plot(x='CenteredLevel', y='EventBaseline', order=[-2,-1,0,1,2], hue='Res
 
 
 ### Plot mean: 
+Modern version of the dot plot (another function).  
 Instead of the box, use just the mean and the error bars. Use the argument:  plot_box='mean'.  
 The Confidence interval is defined with the argument CI (in all the plots). Default is 0.95.  
 
