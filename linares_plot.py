@@ -243,7 +243,12 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
     adjust_spines(plt.gca(), ['left', 'bottom'])
     ## Legend
     if leg==True:
-        l = plt.legend(loc='best', frameon=False, prop={'size': 16})
+        if hue!=None:
+            l = plt.legend(loc='best', frameon=False, prop={'size': 16})
+            for i_h, h_idx in enumerate(hue_order):
+                l.get_texts()[i_h].set_text(h_idx)
+                l.legendHandles[i_h].set_visible(False);
+                l.get_texts()[i_h].set_color(palette[i_h]);
     if leg==False:
         l = plt.legend(loc='best', frameon=False, prop={'size': 0})
     #l.get_texts()[0].set_text('delay=0')
