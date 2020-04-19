@@ -36,7 +36,6 @@ def boots_by_subj(data, col_int, col_subj, n_iterations, alpha, stat):
 
 
 
-
 def adjust_spines(ax, spines):  ### aesthetics, offset axies 
     for loc, spine in ax.spines.items():
         if loc in spines:
