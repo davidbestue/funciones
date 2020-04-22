@@ -240,7 +240,7 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
     plt.gca().get_yaxis().tick_left()
     plt.gca().tick_params(direction='in') #direction
     adjust_spines(plt.gca(), ['left', 'bottom'])
-    ## Legend
+    ## legend
     if leg==True:
         if hue!=None:
             l = plt.legend(loc=loc_l, frameon=False, prop={'size': 16})
