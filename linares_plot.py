@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Fri Jun 28 12:26:52 2019
-@author: David Bestue
+@author: David Bestué
 """
 import pandas as pd
 import matplotlib.pyplot as plt
