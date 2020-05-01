@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from matplotlib.patches import Rectangle
 import scikits.bootstrap as bootstraps
-from seaborn_sinaplot import sinaplot ## install at https://github.com/mparker2/seaborn_sinaplot
+from seaborn_sinaplot import sinaplot ## install it at https://github.com/mparker2/seaborn_sinaplot
 import numpy as np
 
 ### Style of poster for the plots.
