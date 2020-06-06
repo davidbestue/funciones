@@ -232,7 +232,7 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
                 plt.errorbar(x_s, means_hue, yerr=[neg_errors, pos_errors], color=palette[i_h], 
                     linewidth=0, elinewidth=LW)
     #####
-    plt.xticks(  np.arange(len(df[x].unique())) , order)       ###                                                                 # Aesthetics of the plot
+    plt.xticks(  np.arange(len(df[x].unique())) , order)                                                                       # Aesthetics of the plot
     plt.xlim(-0.5, len(df[x].unique())-0.5 )                                                                                    # xlim
     plt.gca().spines['right'].set_visible(False)  ### aesthetics                                                                              # remove right spines
     plt.gca().spines['top'].set_visible(False)                                                                                  # remove top spines
