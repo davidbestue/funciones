@@ -11,7 +11,7 @@ import scikits.bootstrap as bootstraps
 from seaborn_sinaplot import sinaplot ## install it at https://github.com/mparker2/seaborn_sinaplot
 import numpy as np
 
-## Style of poster for the plots
+## Style of poster for the plots.
 sns.set_context("poster", font_scale=1.1)
 sns.set_style("ticks")
 
