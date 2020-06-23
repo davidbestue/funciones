@@ -12,7 +12,7 @@ from seaborn_sinaplot import sinaplot ## install it at https://github.com/mparke
 import numpy as np
 
 ## Style of poster for the plots.
-sns.set_context("poster", font_scale=1.1)
+sns.set_context("poster", font_scale=1.1) ##poster format
 sns.set_style("ticks")
 
 
