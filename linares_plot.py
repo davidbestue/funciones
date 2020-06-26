@@ -15,7 +15,6 @@ import numpy as np
 sns.set_context("poster", font_scale=1.1) ## poster format
 sns.set_style("ticks")
 
-
 def boots_by_subj(data, col_int, col_subj, n_iterations, alpha, stat):
     #### if I want to compare two curves, I would use a sem to check the overlapping of the curves, so a=0.32 (ci = 1-0.68)
     #### you give a 2 column df, one column qith the value and the other column with subject index:
