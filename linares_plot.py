@@ -57,8 +57,6 @@ def adjust_spines(ax, spines):  ### aesthetics, offset axies
         ax.xaxis.set_ticks([])
 
 
-
-
 def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=1, alpha=0.4, CI=0.95,
                   width=0.6, statistic=np.mean, by_subj=False, subj_col=None, plot_box=True, MS=12, LW=4, 
                   reps=10000, leg=True, fill_box=False, alpha_box=1, loc_l='best'):
