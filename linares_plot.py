@@ -64,7 +64,7 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
     ####
     ####
     ####  This plots consists of a SINAPLOT (plot the trials/subjects) showing the distribution &
-    ####  a BOX with the statistic (mean/median) and with the 95% c.i done by bootstrap.
+    ####  a BOX with the statistic (mean/median) and with the 95% c.i done by bootstrap
     ####
     ####
     #### SINAPLOT
