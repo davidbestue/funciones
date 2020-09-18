@@ -238,7 +238,10 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
     plt.gca().get_xaxis().tick_bottom()                                                                                         
     plt.gca().get_yaxis().tick_left()
     plt.gca().tick_params(direction='in') #direction
-    adjust_spines(plt.gca(), ['left', 'bottom'])
+    ##
+    if sep_axis==True: ##decide wether or not, separate the x and y
+        adjust_spines(plt.gca(), ['left', 'bottom'])
+    ##
     ##### Legend
     if leg==True:
         if hue!=None:
