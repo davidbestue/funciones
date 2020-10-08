@@ -257,5 +257,3 @@ def linares_plot(x, y, df, palette, order, hue=None, hue_order=None, point_size=
     #l.get_texts()[0].set_text('delay=0')
     
 
-
-
