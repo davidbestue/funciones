@@ -1,6 +1,10 @@
 
 # Linares plot  
 linares_plot.py    
+Copy this file to your site-packages so you can import it like: 
+```
+from linares_plot import *
+```
 
 Linares plot consist of a ***sinaplot*** plus a box that contains the mean and the 95% confidence interval done by bootstrap.  
 ***You need to install sinaplot from https://github.com/mparker2/seaborn_sinaplot***
@@ -8,13 +12,20 @@ Linares plot consist of a ***sinaplot*** plus a box that contains the mean and t
 You need to have the seaborn_sinaplot folder in your site-packages, as the function calls it as follows:  
 from seaborn_sinaplot import sinaplot.
 
-It also requires ***numpy***, ***pandas***, ***matplotlib***, ***seaborn*** and ***scikits*** (they are usaually installed).  
+It also requires ***numpy***, ***pandas***, ***matplotlib***, ***seaborn***, and ***scikits.bootstrap*** (they are usaually installed, except the last).  
 
 You can plot all the trials or subject by subject in the sinaplot.
-You can decide the range of CI (also define the range 95 if comparing to 0 and 69 if compearing two lines).  
+You can decide the range of CI (also define the range 95 if comparing to 0 and 68 if compearing two lines.  
+CI of 68 is the standard error of the mean https://www.statisticshowto.com/standard-error-of-measurement/).  
+
 The CI is always calculated by bootstrap. If you decide to plot subject by subject, the CI is calculated accordingly.  
 This is decided with the argument: ***by_subj=True***
 (You shuffle radomly when plotting all data (when False) or you shuffle keeping the subjects structure when plotting the subjects mean (when True).  
+Example:  
+N=10 and n=1000. (you have 10 subjects and 100 trials per subject)  
+by_subj=False will plot 1000 dots (all the data) and the CI will be calculated by resampling n, peaking randomly with repetition.  
+by_subj=True will plot 10 dots (the mean of each subject) and the CI will be calculated by resampling n keeping all the data for the subjects peaked.  
+It means that for ecery resampling, it will peak 10 subjects with repetition (all the data from some subjects will not end up in some resamplings).  
 
 The legend is also implemented in a fancy way: no box and the text in color. The legend juts appears when there is "hue".  
 
