@@ -36,8 +36,9 @@ sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
 sock.connect((brain, port))
 
 
-data_raw = sock.recv(15)
+data_raw = sock.recv(50000)
 bytes_ = [ord(data_raw[x]) for x in range(len(data_raw))] 
+bytes_
 
 
 for i in range(10):
