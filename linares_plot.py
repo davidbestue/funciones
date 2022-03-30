@@ -3,6 +3,9 @@
 Created on Fri Jun 28 12:26:52 2019
 @author: David Bestué
 """
+
+#### Documentation: README in https://github.com/davidbestue/funciones
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
