@@ -45,9 +45,3 @@ def remove_outlier_mult_columns(df_in, col_names):
     
 
 
-
-
-### Example
-##df_b_r = remove_outlier_mult_columns( df_b_r, ['beer','rand'])
-    
-df = pd.read_excel('Datos WB Lau.xlsx') 
