@@ -47,10 +47,6 @@ def bootstrap(data, num_samples, statistic, alpha):
     
 #
 
-
-
-
-
 def boots_by_subj(data, col_int, col_subj, n_iterations, alpha, stat):
     #### you give a 2 column df, one column qith the value and the other column with subject index:
     list_subjects = data[col_subj].unique()
